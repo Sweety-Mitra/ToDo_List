@@ -95,7 +95,7 @@ button:hover {
 /* Completed Style */
 .completed {
   text-decoration: line-through;
-  opacity: 0.55;
+  opacity: 0.60;
 }
 
 /* Checkbox adjustments (better alignment) */
