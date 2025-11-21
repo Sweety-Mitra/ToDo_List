@@ -1,50 +1,78 @@
-/* Global */
+/* ----------------------------------------
+   GLOBAL SETTINGS
+   ---------------------------------------- */
+
+/* Make the entire page take full height & remove scrolling */
 html, body {
   height: 100%;
+  overflow: hidden; 
 }
 
+/* Base page styling + Background image */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #eef1f4;
+
+  /* Background image (cover full screen) */
+  background: url("./assets/todo.webp") no-repeat center center/cover;
 }
 
+/* Main app wrapper (full height, centered layout) */
 .app-container {
   max-width: 900px;
   margin: auto;
   padding: 20px;
-  min-height: 100vh;        /* FULL height */
-  display: flex;            /* Make vertical flex */
-  flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* Footer stays bottom */
 }
 
-/* Header */
+
+/* ----------------------------------------
+   HEADER
+   ---------------------------------------- */
+
+/* App title styling */
 .header {
   text-align: center;
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 30px;
   color: #333;
+
+  /* Divider line below header */
+  padding-bottom: 15px;
+  border-bottom: 2px solid #d4d4d8;
 }
 
-/* Layout */
+
+/* ----------------------------------------
+   LAYOUT (LEFT + RIGHT SECTIONS)
+   ---------------------------------------- */
+
+/* Flex layout: Left (todo list) + Right (button) */
 .todo-layout {
   display: flex;
   gap: 20px;
 }
 
-/* Left Section */
+/* Left side (todo list area) */
 .left-section {
   flex: 3;
 }
 
-/* Right Section */
+/* Right side (toggle button) */
 .right-section {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
+
+
+/* ----------------------------------------
+   BUTTON STYLES (GLOBAL)
+   ---------------------------------------- */
 
 button {
   padding: 10px 16px;
@@ -61,13 +89,19 @@ button:hover {
   background: #3e3acb;
 }
 
-/* Add Box */
+
+/* ----------------------------------------
+   ADD TODO INPUT BOX
+   ---------------------------------------- */
+
+/* Input + button container */
 .add-box {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
 }
 
+/* Text input styling */
 .add-box input {
   flex: 1;
   padding: 12px;
@@ -76,7 +110,19 @@ button:hover {
   font-size: 16px;
 }
 
-/* Todo Item */
+/* Input focus effect */
+.add-box input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+  transition: 0.2s;
+}
+
+
+/* ----------------------------------------
+   TODO ITEM STYLING
+   ---------------------------------------- */
+
+/* Each todo card */
 .todo-item {
   background: white;
   padding: 14px;
@@ -85,37 +131,90 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   transition: transform 0.2s ease;
+  animation: fadeIn 0.3s ease; /* Fade animation */
 }
 
+/* Hover glow effect */
 .todo-item:hover {
-  transform: scale(1.01);
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
 }
 
+
+/* ----------------------------------------
+   TODO ACTION BUTTONS (Edit / Delete / Save)
+   ---------------------------------------- */
+
+/* Container for Edit + Delete buttons */
 .todo-actions {
   display: flex;
   gap: 12px;
 }
 
+/* Shared button styles */
 .todo-actions button {
-  padding: 8px 12px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-weight: 600;
 }
 
-/* Completed Style */
+/* Edit button (blue) */
+.todo-actions button:nth-child(1) {
+  background: #3b82f6;
+}
+
+.todo-actions button:nth-child(1):hover {
+  background: #2563eb;
+}
+
+/* Delete button (red) */
+.todo-actions button:nth-child(2) {
+  background: #ef4444;
+}
+
+.todo-actions button:nth-child(2):hover {
+  background: #dc2626;
+}
+
+/* Save button (green) */
+.save-btn {
+  background: #22c55e !important;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #16a34a !important;
+}
+
+
+/* ----------------------------------------
+   COMPLETED TODO STYLE
+   ---------------------------------------- */
+
+/* Strike-through + fade effect */
 .completed {
   text-decoration: line-through;
   opacity: 0.60;
 }
 
-/* Checkbox adjustments (better alignment) */
+
+/* ----------------------------------------
+   CHECKBOX
+   ---------------------------------------- */
+
+/* Larger checkbox for better usability */
 .todo-item input[type="checkbox"] {
   width: 18px;
   height: 18px;
   margin-right: 10px;
   cursor: pointer;
 }
+
+
+/* ----------------------------------------
+   RIGHT-SIDE TOGGLE BUTTON
+   ---------------------------------------- */
 
 .todo-toggle-btn {
   background-color: #4f46e5;
@@ -136,10 +235,34 @@ button:hover {
   transform: scale(0.96);
 }
 
+
+/* ----------------------------------------
+   FOOTER (Always at Bottom)
+   ---------------------------------------- */
+
 .footer {
   text-align: center;
   padding: 15px 0;
   color: #666;
   font-size: 14px;
-  margin-top: auto;   /* THE MAGIC LINE */
+  margin-top: auto; /* Push footer to bottom */
+  border-top: 1px solid #d1d5db;
+  background: #f3f4f6;
+}
+
+
+/* ----------------------------------------
+   ANIMATIONS
+   ---------------------------------------- */
+
+/* Smooth fade-in animation when adding new todos */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

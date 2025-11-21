@@ -4,29 +4,36 @@ import ToDoList from "./components/ToDoList";
 import Footer from "./components/Footer";
 
 function App() {
-  const [ todos, setTodos ] = useState( [] );
-  const [ completedView, setCompletedView ] = useState( false );
+  // Store all todo items
+  const [todos, setTodos] = useState([]);
 
-  const addTodo = ( text ) => {
-    if ( !text.trim() ) return;
-    setTodos( [ ...todos, { id: Date.now(), text, completed: false } ] );
+  // Toggle between all tasks and completed tasks
+  const [completedView, setCompletedView] = useState(false);
+
+  // Add a new todo
+  const addTodo = (text) => {
+    if (!text.trim()) return; // ignore empty input
+    setTodos([...todos, { id: Date.now(), text, completed: false }]);
   };
 
-  const toggleComplete = ( id ) => {
+  // Mark a todo as complete or incomplete
+  const toggleComplete = (id) => {
     setTodos(
-      todos.map( ( item ) =>
+      todos.map((item) =>
         item.id === id ? { ...item, completed: !item.completed } : item
       )
     );
   };
 
-  const deleteTodo = ( id ) => {
-    setTodos( todos.filter( ( item ) => item.id !== id ) );
+  // Delete a todo
+  const deleteTodo = (id) => {
+    setTodos(todos.filter((item) => item.id !== id));
   };
 
-  const editTodo = ( id, newText ) => {
+  // Edit a todo's text
+  const editTodo = (id, newText) => {
     setTodos(
-      todos.map( ( item ) =>
+      todos.map((item) =>
         item.id === id ? { ...item, text: newText } : item
       )
     );
@@ -34,32 +41,35 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* Header Title */}
       <Header />
 
       <div className="todo-layout">
-        {/* LEFT */ }
+        {/* Left Side: Add + List */}
         <div className="left-section">
           <ToDoList
-            todos={ todos }
-            addTodo={ addTodo }
-            toggleComplete={ toggleComplete }
-            deleteTodo={ deleteTodo }
-            editTodo={ editTodo }
-            completedView={ completedView }
+            todos={todos}
+            addTodo={addTodo}
+            toggleComplete={toggleComplete}
+            deleteTodo={deleteTodo}
+            editTodo={editTodo}
+            completedView={completedView}
           />
         </div>
 
-        {/* RIGHT */ }
+        {/* Right Side: Switch Button */}
         <div className="right-section">
           <button
             className="todo-toggle-btn"
-            onClick={ () => setCompletedView( !completedView ) }
+            onClick={() => setCompletedView(!completedView)}
           >
-            { completedView ? "Show All" : "Completed Tasks" }
+            {completedView ? "Show All" : "Completed Tasks"}
           </button>
         </div>
       </div>
-      <Footer/>
+
+      {/* Footer at bottom */}
+      <Footer />
     </div>
   );
 }

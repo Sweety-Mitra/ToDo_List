@@ -1,16 +1,19 @@
 import { useState } from "react";
 import ToDoItem from "./ToDoItem";
 
-function ToDoList({ todos, addTodo, deleteTodo, editTodo, toggleComplete }) {
+function ToDoList({ todos, addTodo, deleteTodo, editTodo, toggleComplete, completedView }) {
+  // Local state for input box
   const [input, setInput] = useState("");
 
+  // Add new todo
   const handleAdd = () => {
     addTodo(input);
-    setInput("");
+    setInput(""); // clear input after adding
   };
 
   return (
     <>
+      {/* Input box + Add button */}
       <div className="add-box">
         <input
           type="text"
@@ -21,15 +24,21 @@ function ToDoList({ todos, addTodo, deleteTodo, editTodo, toggleComplete }) {
         <button onClick={handleAdd}>Add</button>
       </div>
 
-      {todos.map((item) => (
-        <ToDoItem
-          key={item.id}
-          item={item}
-          deleteTodo={deleteTodo}
-          editTodo={editTodo}
-          toggleComplete={toggleComplete}
-        />
-      ))}
+      {/* Show filtered todos 
+          - If completedView = true → show only completed tasks
+          - Else → show all tasks
+      */}
+      {todos
+        .filter((item) => (completedView ? item.completed : true))
+        .map((item) => (
+          <ToDoItem
+            key={item.id}
+            item={item}
+            deleteTodo={deleteTodo}
+            editTodo={editTodo}
+            toggleComplete={toggleComplete}
+          />
+        ))}
     </>
   );
 }
