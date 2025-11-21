@@ -1,6 +1,7 @@
 import { useState } from "react";
+import ToDoItem from "./ToDoItem";
 
-function ToDoList({ todos, addTodo }) {
+function ToDoList({ todos, addTodo, deleteTodo, editTodo, toggleComplete }) {
   const [input, setInput] = useState("");
 
   const handleAdd = () => {
@@ -10,7 +11,6 @@ function ToDoList({ todos, addTodo }) {
 
   return (
     <>
-      {/* Input Box */}
       <div className="add-box">
         <input
           type="text"
@@ -21,11 +21,14 @@ function ToDoList({ todos, addTodo }) {
         <button onClick={handleAdd}>Add</button>
       </div>
 
-      {/* Simple List */}
       {todos.map((item) => (
-        <div key={item.id} className="todo-item">
-          {item.text}
-        </div>
+        <ToDoItem
+          key={item.id}
+          item={item}
+          deleteTodo={deleteTodo}
+          editTodo={editTodo}
+          toggleComplete={toggleComplete}
+        />
       ))}
     </>
   );
