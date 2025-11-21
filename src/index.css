@@ -1,4 +1,8 @@
 /* Global */
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -9,6 +13,9 @@ body {
   max-width: 900px;
   margin: auto;
   padding: 20px;
+  min-height: 100vh;        /* FULL height */
+  display: flex;            /* Make vertical flex */
+  flex-direction: column;
 }
 
 /* Header */
@@ -86,8 +93,12 @@ button:hover {
   transform: scale(1.01);
 }
 
+.todo-actions {
+  display: flex;
+  gap: 12px;
+}
+
 .todo-actions button {
-  margin-left: 8px;
   padding: 8px 12px;
   font-size: 14px;
 }
@@ -104,4 +115,31 @@ button:hover {
   height: 18px;
   margin-right: 10px;
   cursor: pointer;
+}
+
+.todo-toggle-btn {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.todo-toggle-btn:hover {
+  background-color: #4338ca;
+}
+
+.todo-toggle-btn:active {
+  transform: scale(0.96);
+}
+
+.footer {
+  text-align: center;
+  padding: 15px 0;
+  color: #666;
+  font-size: 14px;
+  margin-top: auto;   /* THE MAGIC LINE */
 }

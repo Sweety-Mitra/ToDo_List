@@ -12,7 +12,7 @@ function ToDoItem({ item, deleteTodo, editTodo, toggleComplete }) {
   return (
     <div className={`todo-item ${item.completed ? "completed" : ""}`}>
 
-      {/* Checkbox to mark complete */}
+      {/* Checkbox */}
       <input
         type="checkbox"
         checked={item.completed}
@@ -31,15 +31,16 @@ function ToDoItem({ item, deleteTodo, editTodo, toggleComplete }) {
         <span style={{ flex: 1 }}>{item.text}</span>
       )}
 
-      {/* Edit / Save */}
-      {isEditing ? (
-        <button onClick={saveEdit}>Save</button>
-      ) : (
-        <button onClick={() => setIsEditing(true)}>Edit</button>
-      )}
+      {/* BUTTONS WRAPPER (IMPORTANT!) */}
+      <div className="todo-actions">
+        {isEditing ? (
+          <button onClick={saveEdit}>Save</button>
+        ) : (
+          <button onClick={() => setIsEditing(true)}>Edit</button>
+        )}
 
-      {/* Delete */}
-      <button onClick={() => deleteTodo(item.id)}>Delete</button>
+        <button onClick={() => deleteTodo(item.id)}>Delete</button>
+      </div>
     </div>
   );
 }

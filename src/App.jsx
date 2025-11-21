@@ -1,31 +1,32 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import ToDoList from "./components/ToDoList";
+import Footer from "./components/Footer";
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [completedView, setCompletedView] = useState(false);
+  const [ todos, setTodos ] = useState( [] );
+  const [ completedView, setCompletedView ] = useState( false );
 
-  const addTodo = (text) => {
-    if (!text.trim()) return;
-    setTodos([...todos, { id: Date.now(), text, completed: false }]);
+  const addTodo = ( text ) => {
+    if ( !text.trim() ) return;
+    setTodos( [ ...todos, { id: Date.now(), text, completed: false } ] );
   };
 
-  const toggleComplete = (id) => {
+  const toggleComplete = ( id ) => {
     setTodos(
-      todos.map((item) =>
+      todos.map( ( item ) =>
         item.id === id ? { ...item, completed: !item.completed } : item
       )
     );
   };
 
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((item) => item.id !== id));
+  const deleteTodo = ( id ) => {
+    setTodos( todos.filter( ( item ) => item.id !== id ) );
   };
 
-  const editTodo = (id, newText) => {
+  const editTodo = ( id, newText ) => {
     setTodos(
-      todos.map((item) =>
+      todos.map( ( item ) =>
         item.id === id ? { ...item, text: newText } : item
       )
     );
@@ -36,25 +37,29 @@ function App() {
       <Header />
 
       <div className="todo-layout">
-        {/* LEFT */}
+        {/* LEFT */ }
         <div className="left-section">
           <ToDoList
-            todos={todos}
-            addTodo={addTodo}
-            toggleComplete={toggleComplete}
-            deleteTodo={deleteTodo}
-            editTodo={editTodo}
-            completedView={completedView}
+            todos={ todos }
+            addTodo={ addTodo }
+            toggleComplete={ toggleComplete }
+            deleteTodo={ deleteTodo }
+            editTodo={ editTodo }
+            completedView={ completedView }
           />
         </div>
 
-        {/* RIGHT */}
+        {/* RIGHT */ }
         <div className="right-section">
-          <button onClick={() => setCompletedView(!completedView)}>
-            {completedView ? "Show All" : "Completed Tasks"}
+          <button
+            className="todo-toggle-btn"
+            onClick={ () => setCompletedView( !completedView ) }
+          >
+            { completedView ? "Show All" : "Completed Tasks" }
           </button>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
